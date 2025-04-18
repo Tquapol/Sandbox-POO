@@ -6,7 +6,7 @@ Tâches à réaliser :
 - [ ] Préparer un plan de réalisation
 - [ ] Installer SFML
 - [ ] Réaliser le projet
-- [ ] Prparer le compte-rendu
+- [ ] Préparer le compte-rendu
 
 Cahier des charges : 
 - [ ] Créer une interface graphique
