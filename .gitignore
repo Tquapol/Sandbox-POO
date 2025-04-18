@@ -1,10 +1,6 @@
-.exe
-.pdb
-.ilk
-.tlog
-.lastbuildstate
-.obj
-.vcxproj
-.sln
-.user
-.filters
+Sand Project\Sand Project
+Sand Project\x64
+Sand Project\Sand Project.sln
+Sand Project\Sand Project.vcxproj
+Sand Project\Sand Project.vcxproj.filters
+Sand Project\Sand Project.vcxproj.user
