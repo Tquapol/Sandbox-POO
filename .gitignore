@@ -1,7 +1,10 @@
 Sandbox-POO/.vs
 Sandbox-POO/Sandbox-POO
+Sandbox-POO/External
+Sandbox-POO/Debug
 Sandbox-POO/x64
 Sandbox-POO/*.sln
+Sandbox-POO/*.dll
 Sandbox-POO/*.vcxproj
 Sandbox-POO/*.vcxproj.filters
 Sandbox-POO/*.vcxproj.user
