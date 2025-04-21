@@ -1,6 +1,7 @@
 // Jules ROBIN
 
 #include <iostream>
+#include "Scène.h"
 #include "Pierre.h"
 #include "Sable.h"
 #include "Eau.h"
@@ -8,12 +9,22 @@
 using namespace std;
 
 int main() {
-	Pierre p(10, 20);
-	Sable s(100, 30);
-	Eau e;
-	p.print();
-	s.print();
-	e.print();
-	cout << (p.getDensity() > s.getDensity());
+	Scene scene;
+	scene.print();
+	cout << endl;
+
+	scene.setMaterial(new Pierre, 2, 2);
+	scene.setMaterial(new Sable, 1, 2);
+	scene.setMaterial(new Eau, 0, 2);
+	scene.print();
+	cout << endl;
+
+	scene.removeMaterial(2, 2);
+	scene.print();
+	cout << endl;
+
+	scene.resize(3, 8);
+	scene.print();
+
 	return 0;
 }

@@ -38,6 +38,7 @@ void Scene::print() const{
 			else {
 				cout << 0;
 			}
+			cout << char(9);
 		}
 		cout << endl;
 	}
@@ -48,7 +49,7 @@ void Scene::resize(unsigned int sizeX, unsigned int sizeY) {
 	if (sizeY < sizeY_) {
 		for (int x = 0; x < sizeX_; x++) {
 			for (int m = 0; m < sizeY_ - sizeY; m++) {
-				if (scene_[x][-1] != nullptr) {
+				if (scene_[x].back() != nullptr) {
 					delete scene_[x][-1];
 				}
 				scene_[x].pop_back();
@@ -57,11 +58,8 @@ void Scene::resize(unsigned int sizeX, unsigned int sizeY) {
 	}
 	else if (sizeY > sizeY_) {
 		for (int x = 0; x < sizeX_; x++) {
-			for (int m = 0; m < sizeY_ - sizeY; m++) {
-				if (scene_[x][-1] != nullptr) {
-					delete scene_[x][-1];
-				}
-				scene_[x].pop_back();
+			for (int m = 0; m < sizeY - sizeY_; m++) {
+				scene_[x].push_back(nullptr);
 			}
 		}
 	}
@@ -90,13 +88,16 @@ void Scene::resize(unsigned int sizeX, unsigned int sizeY) {
 }
 
 
-Materiau* Scene::setMaterial(Materiau* M, unsigned int x, unsigned int y) {
+void Scene::setMaterial(Materiau* M, unsigned int x, unsigned int y) {
 	if ((x < sizeX_) && (y < sizeY_)) {
 		Materiau* exM = getMaterial(x, y);
+		if (exM != nullptr) {
+			delete exM;
+		}
 		scene_[x][y] = M;
-		return exM;
+		M->setX(x);
+		M->setY(y);
 	}
-	return nullptr;
 }
 
 
