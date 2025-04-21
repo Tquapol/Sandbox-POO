@@ -1,7 +1,7 @@
-./Sandbox-POO/Sandbox-POO
-./Sandbox-POO/x64
-./Sandbox-POO/.vs
-./Sandbox-POO/*.sln
-./Sandbox-POO/*.vcxproj
-./Sandbox-POO/*.vcxproj.filters
-./Sandbox-POO/*.vcxproj.user
+Sandbox-POO/Sandbox-POO
+Sandbox-POO/x64
+Sandbox-POO/.vs
+Sandbox-POO/*.sln
+Sandbox-POO/*.vcxproj
+Sandbox-POO/*.vcxproj.filters
+Sandbox-POO/*.vcxproj.user
