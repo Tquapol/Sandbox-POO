@@ -4,7 +4,7 @@ Tâches à réaliser :
 - [x] Créer le repository git
 - [ ] Dessiner le diagramme des classes
 - [ ] Préparer un plan de réalisation
-- [ ] Installer SFML
+- [x] Installer SFML
 - [ ] Réaliser le projet
 - [ ] Prparer le compte-rendu
 
