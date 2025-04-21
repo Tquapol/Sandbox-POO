@@ -20,7 +20,7 @@ void Materiau::setY(int y) {
 	y_ = y;
 }
 
-void Materiau::print() {
+void Materiau::print() const {
 	cout << "(Position :(" << x_ << "," << y_ << "), ";
 	cout << "Solide :" << solid_ << ", ";
 	cout << "Densite :" << density_ << ")" << endl;
