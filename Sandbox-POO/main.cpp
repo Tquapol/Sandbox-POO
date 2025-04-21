@@ -1,24 +1,30 @@
-#include <SFML/Graphics.hpp>
+// Jules ROBIN
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+#include <iostream>
+#include "Scène.h"
+#include "Pierre.h"
+#include "Sable.h"
+#include "Eau.h"
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+using namespace std;
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
+int main() {
+	Scene scene;
+	scene.print();
+	cout << endl;
 
-    return 0;
+	scene.setMaterial(new Pierre, 2, 2);
+	scene.setMaterial(new Sable, 1, 2);
+	scene.setMaterial(new Eau, 0, 2);
+	scene.print();
+	cout << endl;
+
+	scene.removeMaterial(2, 2);
+	scene.print();
+	cout << endl;
+
+	scene.resize(3, 8);
+	scene.print();
+
+	return 0;
 }
