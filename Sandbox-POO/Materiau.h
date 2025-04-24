@@ -1,6 +1,9 @@
 // Jules ROBIN
 
 #pragma once
+#include <vector>
+
+using namespace std;
 
 class Materiau {
 	int x_;
@@ -22,5 +25,5 @@ public:
 	void setX(int x);
 	void setY(int y);
 	virtual void print() const;
-	//virtual void evolveState() = 0;
+	virtual bool evolveState(vector<vector<Materiau*>> scene);
 };

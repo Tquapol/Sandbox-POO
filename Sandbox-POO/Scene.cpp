@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Scène.h"
+#include "Scene.h"
 
 Scene::Scene(unsigned int sizeX, unsigned int sizeY) {
 	sizeX_ = sizeX;
@@ -88,7 +88,7 @@ void Scene::resize(unsigned int sizeX, unsigned int sizeY) {
 }
 
 
-void Scene::setMaterial(Materiau* M, unsigned int x, unsigned int y) {
+Materiau* Scene::setMaterial(Materiau* M, unsigned int x, unsigned int y) {
 	if ((x < sizeX_) && (y < sizeY_)) {
 		Materiau* exM = getMaterial(x, y);
 		if (exM != nullptr) {
@@ -97,7 +97,9 @@ void Scene::setMaterial(Materiau* M, unsigned int x, unsigned int y) {
 		scene_[x][y] = M;
 		M->setX(x);
 		M->setY(y);
+		return exM;
 	}
+	return nullptr;
 }
 
 

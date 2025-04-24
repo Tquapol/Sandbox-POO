@@ -25,3 +25,7 @@ void Materiau::print() const {
 	cout << "Solide :" << solid_ << ", ";
 	cout << "Densite :" << density_ << ")" << endl;
 }
+
+bool Materiau::evolveState(vector<vector<Materiau*>> scene_) {
+	return true;
+}

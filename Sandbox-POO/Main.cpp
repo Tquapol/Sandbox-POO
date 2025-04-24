@@ -1,7 +1,7 @@
 // Jules ROBIN
 
 #include <iostream>
-#include "Scène.h"
+#include "Scene.h"
 #include "Pierre.h"
 #include "Sable.h"
 #include "Eau.h"
