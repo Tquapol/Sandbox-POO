@@ -33,12 +33,11 @@ void Scene::print() const{
 	for (int x = 0; x < sizeX_; x++) {
 		for (int y = 0; y < sizeY_; y++) {
 			if (scene_[x][y] != nullptr) {
-				cout << scene_[x][y]->getDensity();
+				cout << " " << scene_[x][y]->getDensity() << " ";
 			}
 			else {
-				cout << 0;
+				cout << "   ";
 			}
-			cout << char(9);
 		}
 		cout << endl;
 	}
