@@ -91,9 +91,6 @@ void Scene::resize(unsigned int sizeX, unsigned int sizeY) {
 Materiau* Scene::setMaterial(Materiau* M, unsigned int x, unsigned int y) {
 	if ((x < sizeX_) && (y < sizeY_)) {
 		Materiau* exM = getMaterial(x, y);
-		if (exM != nullptr) {
-			delete exM;
-		}
 		scene_[x][y] = M;
 		M->setX(x);
 		M->setY(y);
@@ -108,5 +105,66 @@ void Scene::removeMaterial(unsigned int x, unsigned int y) {
 		Materiau* M = scene_[x][y];
 		scene_[x][y] = nullptr;
 		delete M;
+	}
+}
+
+
+void Scene::evolve() {
+	vector<vector<Materiau*>>::reverse_iterator it_ligne;
+	vector<Materiau*>::reverse_iterator it_materiau;
+
+	for (it_ligne = scene_.rbegin(); it_ligne != scene_.rend(); it_ligne++) {		//lecture de bas en haut
+		vector<Materiau*> ligne = *it_ligne;
+
+		for (it_materiau = ligne.rbegin(); it_materiau != ligne.rend(); it_materiau++) {		//de droite à gauche
+			Materiau* M = *it_materiau;
+
+			if (M != nullptr) {
+				if (not M->hasMoved()) {
+					if (M->evolveState(&scene_)) {
+						if (M->getDensity() == 0) {
+							delete setMaterial(nullptr, M->getX(), M->getY());
+						}
+						else {
+							Materiau* M_voisin = setMaterial(M, M->getX(), M->getY());
+
+							if (M_voisin != nullptr) {			//déplace le matériau remplacé
+								int n = rand() % 2;
+								if (scene_[M_voisin->getX()][M_voisin->getY() + 1 - 2 * n] == nullptr) {
+									M_voisin->setY(M_voisin->getY() + 1 - 2 * n);
+								}
+								else if (scene_[M_voisin->getX()][M_voisin->getY() - 1 + 2 * n] == nullptr) {
+									M_voisin->setY(M_voisin->getY() - 1 + 2 * n);
+								}
+								else if (scene_[M_voisin->getX() - 1][M_voisin->getY()] == nullptr) {
+									M_voisin->setX(M_voisin->getX() - 1);
+								}
+								else {
+									n = rand() % 2;
+									if (scene_[M_voisin->getX() - 1][M_voisin->getY() + 1 - 2*n] == nullptr) {
+										M_voisin->setX(M_voisin->getX() - 1);
+										M_voisin->setY(M_voisin->getY() + 1 - 2 * n);
+									}
+									else{
+										M_voisin->setX(M_voisin->getX() - 1);
+										M_voisin->setY(M_voisin->getY() - 1 + 2 * n);
+									}
+								}
+								setMaterial(M_voisin, M_voisin->getX(), M_voisin->getY());
+								M_voisin->setMovedAt(true);
+							}
+							M->setMovedAt(true);
+						}
+					}
+				}
+			}
+		}
+	}
+	for (vector<Materiau*> ligne : scene_) {		//une fois tous les matériaux bougés
+		for (Materiau* M : ligne) {					//on les remets au repos
+			if (M != nullptr) {
+				M->setMovedAt(false);
+			}
+		}
 	}
 }

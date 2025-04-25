@@ -6,7 +6,6 @@
 class Pierre : public Materiau{
 
 public :
-	Pierre(int x = 0, int y = 0, bool solid = true, unsigned int density = 10000);
+	Pierre(int x = 0, int y = 0, bool solid = true, unsigned int density = 3);
 	void print() const;
-	//void evolveState();
 };

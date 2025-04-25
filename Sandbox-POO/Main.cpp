@@ -1,6 +1,7 @@
 // Jules ROBIN
 
 #include <iostream>
+#include <Windows.h>
 #include "Scene.h"
 #include "Pierre.h"
 #include "Sable.h"
@@ -9,22 +10,21 @@
 using namespace std;
 
 int main() {
-	Scene scene;
-	scene.print();
-	cout << endl;
+	Scene scene(9, 9);
 
-	scene.setMaterial(new Pierre, 2, 2);
-	scene.setMaterial(new Sable, 1, 2);
-	scene.setMaterial(new Eau, 0, 2);
+	for (int i = 0; i < 3; i++) {
+		scene.setMaterial(new Pierre, 7, 3+i);
+	}
+	scene.setMaterial(new Sable, 2, 4);
+	scene.setMaterial(new Sable, 1, 4);
 	scene.print();
-	cout << endl;
 
-	scene.removeMaterial(2, 2);
-	scene.print();
-	cout << endl;
-
-	scene.resize(3, 8);
-	scene.print();
+	for (int i = 0; i < 10; i++) {
+		Sleep(1000);
+		system("CLS");
+		scene.evolve();
+		scene.print();
+	}
 
 	return 0;
 }
