@@ -24,6 +24,7 @@ public:
 	bool isSolid() const { return solid_; }
 	void setX(int x);
 	void setY(int y);
+	void setDensity(unsigned int d);
 	virtual void print() const;
 	virtual bool evolveState(vector<vector<Materiau*>> scene);
 };

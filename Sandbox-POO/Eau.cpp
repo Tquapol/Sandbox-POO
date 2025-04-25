@@ -15,19 +15,27 @@ void Eau::print() const {
 
 
 bool Eau::evolveState(vector<vector<Materiau*>> scene) {
-	Materiau* M_voisin = scene[Materiau::getX() + 1][Materiau::getY()];
+	if (Materiau::evolveState(scene)) {
+		return true;
+	}
 
-	if ((M_voisin == nullptr) || (Materiau::getDensity() > M_voisin->getDensity())) {		// gravité
-		Materiau::setX(Materiau::getX() + 1);
+	int x = Materiau::getX();
+	int y = Materiau::getY();
+	int d = Materiau::getDensity();
+
+	Materiau* M_voisin = scene[x + 1][y];
+
+	if ((M_voisin == nullptr) || ((d > M_voisin->getDensity()) && (not M_voisin->isSolid()))) {		// gravité
+		Materiau::setX(x + 1);
 		return true;
 	}
 
 	int n = rand() % 2;		// 0 ou 1
 	for (int i = 0; i < 2; i++) {														// glissement
-		M_voisin = scene[Materiau::getX() + 1][Materiau::getY() + 1 - 2 * n];
-		if ((M_voisin == nullptr) || (Materiau::getDensity() > M_voisin->getDensity())) {
-			Materiau::setX(Materiau::getX() + 1);
-			Materiau::setY(Materiau::getY() + 1 - 2 * n);
+		M_voisin = scene[x + 1][y + 1 - 2 * n];
+		if ((M_voisin == nullptr) || ((d > M_voisin->getDensity()) && (not M_voisin->isSolid()))) {
+			Materiau::setX(x + 1);
+			Materiau::setY(y + 1 - 2 * n);
 			return true;
 		}
 		n = 1 - n;		// 0 si n = 1 / 1 si n = 0
@@ -35,9 +43,9 @@ bool Eau::evolveState(vector<vector<Materiau*>> scene) {
 
 	n = rand() % 2;
 	for (int i = 0; i < 2; i++) {														// écoulement
-		M_voisin = scene[Materiau::getX() + 1][Materiau::getY() + 1 - 2 * n];
+		M_voisin = scene[x][y + 1 - 2 * n];
 		if (M_voisin == nullptr) {														// les éléments ne changent pas de position horizontalement malgré les différences de densité
-			Materiau::setY(Materiau::getY() + 1 - 2 * n);
+			Materiau::setY(y + 1 - 2 * n);
 			return true;
 		}
 		n = 1 - n;
