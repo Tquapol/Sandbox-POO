@@ -122,7 +122,11 @@ void Scene::evolve() {
 				if (not M->hasMoved()) {
 					if (M->evolveState(&scene_)) {
 						if (M->getDensity() == 0) {
+<<<<<<< Updated upstream
 							delete setMaterial(nullptr, M->getX(), M->getY());
+=======
+							removeMaterial(M->getX(), M->getY());
+>>>>>>> Stashed changes
 						}
 						else {
 							Materiau* M_voisin = setMaterial(M, M->getX(), M->getY());
