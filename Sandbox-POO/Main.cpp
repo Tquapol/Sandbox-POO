@@ -1,7 +1,9 @@
 // Jules ROBIN
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include <Windows.h>
+#include "IHM.h"
 #include "Scene.h"
 #include "Pierre.h"
 #include "Sable.h"
@@ -9,32 +11,12 @@
 
 using namespace std;
 
-int main() {
-	Scene scene(11, 11);
 
-	for (int i = 0; i < 7; i++) {
-		scene.setMaterial(new Pierre, 10, 2 + i);
-	}
-	for (int i = 0; i < 3; i++) {
-		scene.setMaterial(new Eau, 7, 4 + i);
-	}
-	for (int i = 0; i < 3; i++) {
-		scene.setMaterial(new Eau, 1+i, 9);
-	}
-	scene.setMaterial(new Pierre, 9, 2);
-	scene.setMaterial(new Pierre, 9, 8);
+int main()
+{
+    Scene scene(500, 500);
+    IHM inte(500, 500);
+    inte.renderSFML(&scene);
 
-	scene.setMaterial(new Sable, 2, 5);
-	scene.setMaterial(new Sable, 1, 5);
-	scene.setMaterial(new Sable, 0, 5);
-	scene.print();
-
-	for (int i = 0; i < 20; i++) {
-		Sleep(1000);
-		system("CLS");
-		scene.evolve();
-		scene.print();
-	}
-
-	return 0;
+    return 0;
 }

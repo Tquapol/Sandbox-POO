@@ -5,11 +5,12 @@
 
 using namespace std;
 
-Materiau::Materiau(int x, int y, bool solid, unsigned int density) {
+Materiau::Materiau(int x, int y, bool solid, unsigned int density, sf::Color color) {
 	x_ = x;
 	y_ = y;
 	solid_ = solid;
 	density_ = density;
+	color_ = color;
 }
 
 void Materiau::setX(int x) {

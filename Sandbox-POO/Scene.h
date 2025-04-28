@@ -11,7 +11,7 @@ class Scene {
 	unsigned int sizeY_;
 	vector<vector<Materiau*>> scene_;
 public :
-	Scene(unsigned int sizeX = 5, unsigned int sizeY = 5);
+	Scene(unsigned int sizeX = 500, unsigned int sizeY = 500);
 	~Scene();
 	unsigned int getSizeX() const { return sizeX_; }
 	unsigned int getSizeY() const { return sizeY_; }
