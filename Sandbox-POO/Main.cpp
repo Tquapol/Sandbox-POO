@@ -10,30 +10,21 @@
 using namespace std;
 
 int main() {
-	Scene scene(11, 11);
+	srand(time(nullptr));
+	Scene scene(30, 19, false);
 
-	for (int i = 0; i < 7; i++) {
-		scene.setMaterial(new Pierre, 10, 2 + i);
+	for (int i = 0; i < 30; i++) {
+		scene.setMaterial(new InerSable, 29 - i, 10);
 	}
-	for (int i = 0; i < 3; i++) {
-		scene.setMaterial(new Eau, 7, 4 + i);
-	}
-	for (int i = 0; i < 3; i++) {
-		scene.setMaterial(new Eau, 1+i, 9);
-	}
-	scene.setMaterial(new Pierre, 9, 2);
-	scene.setMaterial(new Pierre, 9, 8);
 
-	scene.setMaterial(new Sable, 2, 5);
-	scene.setMaterial(new Sable, 1, 5);
-	scene.setMaterial(new Sable, 0, 5);
-	scene.print();
-
-	for (int i = 0; i < 20; i++) {
-		Sleep(1000);
+	for (int i = 0; i < 40; i++) {
+		if (i == 5) {
+			scene.removeMaterial(29, 10);
+		}
 		system("CLS");
-		scene.evolve();
 		scene.print();
+		scene.evolve();
+		Sleep(200);
 	}
 
 	return 0;

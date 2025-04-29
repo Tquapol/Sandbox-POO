@@ -4,9 +4,10 @@
 #include <vector>
 #include "Scene.h"
 
-Scene::Scene(unsigned int sizeX, unsigned int sizeY) {
+Scene::Scene(unsigned int sizeX, unsigned int sizeY, bool vide) {
 	sizeX_ = sizeX;
 	sizeY_ = sizeY;
+	vide_ = vide;
 	scene_ = {};
 	for (int x = 0; x < sizeX; x++) {
 		vector<Materiau*> v = {};
@@ -120,10 +121,9 @@ void Scene::evolve() {
 
 			if (M != nullptr) {
 				if (not M->hasMoved()) {
-					if (M->evolveState(&scene_)) {
+					if (M->evolveState(&scene_, vide_)) {
 						if (M->getDensity() == 0) {
-							scene_[M->getX()][M->getY()] = nullptr;
-							delete M;
+							removeMaterial(M->getX(), M->getY());
 						}
 						else {
 							Materiau* M_voisin = setMaterial(M, M->getX(), M->getY());

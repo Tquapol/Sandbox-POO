@@ -9,9 +9,10 @@ using namespace std;
 class Scene {
 	unsigned int sizeX_;
 	unsigned int sizeY_;
+	bool vide_;
 	vector<vector<Materiau*>> scene_;
 public :
-	Scene(unsigned int sizeX = 5, unsigned int sizeY = 5);
+	Scene(unsigned int sizeX = 5, unsigned int sizeY = 5, bool vide = true);
 	~Scene();
 	unsigned int getSizeX() const { return sizeX_; }
 	unsigned int getSizeY() const { return sizeY_; }
