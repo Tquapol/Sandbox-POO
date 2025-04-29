@@ -42,6 +42,10 @@ void Scene::print() const{
 		}
 		cout << endl;
 	}
+	for (int i = 0; i < sizeY_; i++) {
+		cout << "---";
+	}
+	cout << endl;
 }
 
 
