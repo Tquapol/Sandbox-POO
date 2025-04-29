@@ -31,7 +31,6 @@ public:
 	void setMovedAt(bool m);
 	void setDensity(unsigned int d);
 	virtual void print() const;
-	virtual bool evolveState(vector<vector<Materiau*>>* scene);
 	sf::Color getColor() const { return color_; }
 	virtual bool evolveState(vector<vector<Materiau*>>* scene, bool vide);
 };

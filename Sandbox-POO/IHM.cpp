@@ -10,10 +10,9 @@ IHM::IHM(unsigned int sizeX, unsigned int sizeY) {
 	sizeX_ = sizeX;
 	sizeY_ = sizeY;
 	window_.create(sf::VideoMode(sizeY_, sizeX_), "Sand Project");
+    window_.setFramerateLimit(60);
 }
 void IHM::renderSFML(Scene* scene) {
-    while (window_.isOpen())
-    {
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (window_.pollEvent(event))
@@ -25,21 +24,18 @@ void IHM::renderSFML(Scene* scene) {
 
         // clear the window with black color
         window_.clear(sf::Color::Black);
+
+        sf::VertexArray points(sf::Points);
         for (int x = 1; x < sizeX_; x++) {
             for (int y = 1; y < sizeY_; y++) {
-                sf::VertexArray point(sf::Points,1);
-                point[0].position = sf::Vector2f(float(y), float(x));
-                if (scene->getMaterial(x, y) == nullptr) {
-                    point[0].color = sf::Color::Transparent;
+                sf::Vertex point;
+                if (scene->getMaterial(x, y) != nullptr) {
+                    point.position = sf::Vector2f(float(y), float(x));
+                    point.color = scene->getMaterial(x, y)->getColor();
+                    points.append(point);
                 }
-                else {
-                    point[0].color = scene->getMaterial(x, y)->getColor();
-                }
-                window_.draw(point);
             }
         }
-        
+        window_.draw(points);
         window_.display();
-    }
-	
 }
