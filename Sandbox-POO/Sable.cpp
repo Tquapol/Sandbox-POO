@@ -5,8 +5,8 @@
 
 using namespace std;
 
-Sable::Sable(int x, int y, bool solid, unsigned int density)
-	: Materiau::Materiau(x, y, solid, density) {};
+Sable::Sable(int x, int y, bool solid, unsigned int density, sf::Color color)
+	: Materiau::Materiau(x, y, solid, density, color) {};
 
 
 void Sable::print() const {

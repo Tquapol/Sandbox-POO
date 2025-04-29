@@ -2,6 +2,7 @@
 
 #pragma once
 #include <vector>
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -10,6 +11,7 @@ class Materiau {
 	int y_;
 	bool solid_;
 	unsigned int density_;
+	sf::Color color_;
 	//*
 	// La densité définit si le matériau va couler ou floter.
 	// A densités égale les matériaux se superposent.
@@ -18,7 +20,7 @@ class Materiau {
 	//*
 	bool moved_;		// définit si un matériau a évolué ou pas
 public:
-	Materiau(int x = 0, int y = 0, bool solid = false, unsigned int density = 0);
+	Materiau(int x = 0, int y = 0, bool solid = false, unsigned int density = 0, sf::Color color = sf::Color::Transparent);
 	int getX() const { return x_; }
 	int getY() const { return y_; }
 	unsigned int getDensity() const { return density_; }
@@ -29,5 +31,7 @@ public:
 	void setMovedAt(bool m);
 	void setDensity(unsigned int d);
 	virtual void print() const;
+	virtual bool evolveState(vector<vector<Materiau*>>* scene);
+	sf::Color getColor() const { return color_; }
 	virtual bool evolveState(vector<vector<Materiau*>>* scene, bool vide);
 };

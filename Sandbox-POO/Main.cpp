@@ -1,7 +1,9 @@
 // Jules ROBIN
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include <Windows.h>
+#include "IHM.h"
 #include "Scene.h"
 #include "Pierre.h"
 #include "Sable.h"
@@ -12,7 +14,9 @@ using namespace std;
 
 int main() {
 	srand(time(nullptr));
-	Scene scene(30, 29, false);
+    Scene scene(500, 500);
+    IHM inte(500, 500);
+    inte.renderSFML(&scene);
 
 	for (int i = 0; i < 30; i++) {
 		scene.setMaterial(new InerSable, 29 - i, 15);
@@ -33,4 +37,3 @@ int main() {
 	}
 
 	return 0;
-}

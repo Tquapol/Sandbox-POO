@@ -12,7 +12,7 @@ class Scene {
 	bool vide_;
 	vector<vector<Materiau*>> scene_;
 public :
-	Scene(unsigned int sizeX = 5, unsigned int sizeY = 5, bool vide = true);
+	Scene(unsigned int sizeX = 500, unsigned int sizeY = 500, bool vide = true);
 	~Scene();
 	unsigned int getSizeX() const { return sizeX_; }
 	unsigned int getSizeY() const { return sizeY_; }

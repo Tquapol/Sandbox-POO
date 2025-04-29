@@ -5,8 +5,8 @@
 
 using namespace std;
 
-Eau::Eau(int x, int y, bool solid, unsigned int density)
-	: Materiau::Materiau(x, y, solid, density) {};
+Eau::Eau(int x, int y, bool solid, unsigned int density, sf::Color color)
+	: Materiau::Materiau(x, y, solid, density, color) {};
 
 void Eau::print() const {
 	cout << "Eau ";
