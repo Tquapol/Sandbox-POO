@@ -15,14 +15,18 @@ void Sable::print() const {
 }
 
 
-bool Sable::evolveState(vector<vector<Materiau*>>* scene) {
-	if (Materiau::evolveState(scene)) {
+bool Sable::evolveState(vector<vector<Materiau*>>* scene, bool vide) {
+	if (Materiau::evolveState(scene, vide)) {
 		return true;
 	}
 
 	int x = Materiau::getX();
 	int y = Materiau::getY();
 	int d = Materiau::getDensity();
+
+	if ((not vide) && (x == scene->size() - 1)) {
+		return false;
+	}
 
 	Materiau* M_voisin = scene->at(x + 1).at(y);
 

@@ -35,13 +35,44 @@ void Materiau::print() const {
 	cout << "Densite :" << density_ << ")" << endl;
 }
 
-bool Materiau::evolveState(vector<vector<Materiau*>>* scene) {
+bool Materiau::evolveState(vector<vector<Materiau*>>* scene, bool vide) {
 	if (not isSolid()) {
 		int sizeX = scene->size();
 		int sizeY = scene->at(0).size();
-		if ((x_ == sizeX - 1) || (y_ == 0) || (y_ == sizeY - 1)) {				// L'élément disparait aux bords de la scène
-			Materiau::setDensity(0);
-			return true;
+		int n = rand() % 2;
+		if (vide) {
+			if (x_ == sizeX - 1){
+				Materiau::setDensity(0);
+				return true;
+			}
+			if (((y_ == 0) || (y_ == sizeY - 1)) && (scene->at(x_ + 1).at(y_) != nullptr)) {
+				if ((y_ + 1 - 2 * n > sizeY - 1)||(y_ + 1 - 2 * n < 0)) {
+					Materiau::setDensity(0);
+				}
+				else {
+					y_ = y_ + 1 - 2 * n;
+				}
+				return true;
+			}
+		}
+		else {
+			if (x_ == sizeX - 1) {
+				if ((y_ == 0) || (y_ == sizeY - 1)) {
+					Materiau::setDensity(0);
+					return true;
+				}
+			}
+			else {
+				if (((y_ == 0) || (y_ == sizeY - 1)) && (scene->at(x_ + 1).at(y_) != nullptr)) {
+					if ((y_ + 1 - 2 * n > sizeY - 1) || (y_ + 1 - 2 * n < 0)) {
+						Materiau::setDensity(0);
+					}
+					else {
+						y_ = y_ + 1 - 2 * n;
+					}
+					return true;
+				}
+			}
 		}
 	}
 	return false;
