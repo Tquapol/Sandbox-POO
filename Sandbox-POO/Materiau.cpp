@@ -1,6 +1,7 @@
 // Jules ROBIN
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include "Materiau.h"
 
 using namespace std;
@@ -64,12 +65,7 @@ bool Materiau::evolveState(vector<vector<Materiau*>>* scene, bool vide) {
 			}
 			else {
 				if (((y_ == 0) || (y_ == sizeY - 1)) && (scene->at(x_ + 1).at(y_) != nullptr)) {
-					if ((y_ + 1 - 2 * n > sizeY - 1) || (y_ + 1 - 2 * n < 0)) {
 						Materiau::setDensity(0);
-					}
-					else {
-						y_ = y_ + 1 - 2 * n;
-					}
 					return true;
 				}
 			}

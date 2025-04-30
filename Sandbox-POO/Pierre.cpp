@@ -1,6 +1,7 @@
 // Jules ROBIN
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include "Pierre.h"
 
 using namespace std;

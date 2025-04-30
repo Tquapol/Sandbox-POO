@@ -1,6 +1,7 @@
 // Jules ROBIN
 
 #pragma once
+#include <SFML/Graphics.hpp>
 #include "Materiau.h"
 
 class Pierre : public Materiau{

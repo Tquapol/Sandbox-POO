@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <SFML/Graphics.hpp>
 #include "Sable.h"
 #include "Scene.h"
 

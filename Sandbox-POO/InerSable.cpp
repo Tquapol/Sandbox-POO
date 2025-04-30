@@ -1,12 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <SFML/Graphics.hpp>
 #include "InerSable.h"
 #include "Scene.h"
 
 using namespace std;
 
-InerSable::InerSable(int x, int y, bool v, bool solid, unsigned int density)
-	: Materiau::Materiau(x, y, solid, density) {
+InerSable::InerSable(int x, int y, bool v, bool solid, unsigned int density, sf::Color color)
+	: Materiau::Materiau(x, y, solid, density, color) {
 	inertie_ = v;
 };
 

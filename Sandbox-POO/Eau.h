@@ -2,6 +2,7 @@
 
 #pragma once
 #include <vector>
+#include <SFML/Graphics.hpp>
 #include "Materiau.h"
 
 using namespace std;

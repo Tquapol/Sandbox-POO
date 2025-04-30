@@ -14,26 +14,25 @@ using namespace std;
 
 int main() {
 	srand(time(nullptr));
-    Scene scene(500, 500);
-    IHM inte(500, 500);
-    inte.renderSFML(&scene);
-
-	for (int i = 0; i < 30; i++) {
-		scene.setMaterial(new InerSable, 29 - i, 15);
-		scene.setMaterial(new InerSable, 29 - i, 14);
-		scene.setMaterial(new InerSable, 29 - i, 16);
-	}
+	int n = 100;
+	int m = 100;
+	Scene scene(n, m, false);
+	IHM inte(5*n, 5*m);
 
 	for (int i = 0; i < 40; i++) {
-		if (i == 5) {
-			scene.removeMaterial(29, 15);
-			scene.removeMaterial(29, 14);
-			scene.removeMaterial(29, 16);
+		for (int j = 0; j < 20; j++) {
+			scene.setMaterial(new Sable, 10 + i, 40 + j);
 		}
-		system("CLS");
-		scene.print();
-		scene.evolve();
-		Sleep(100);
+	}
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 40; j++) {
+			scene.setMaterial(new Eau, 50 + i, 30 + j);
+		}
 	}
 
+	while (true) {
+		inte.renderSFML(&scene);
+		scene.evolve();
+	}
 	return 0;
+}
