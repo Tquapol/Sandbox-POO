@@ -4,6 +4,7 @@
 #include<SFML/Graphics.hpp>
 
 using namespace std;
+using namespace sf;
 
 
 IHM::IHM(unsigned int sizeX, unsigned int sizeY) {
@@ -25,19 +26,16 @@ void IHM::renderSFML(Scene* scene) {
 
     // clear the window with black color
     window_.clear(sf::Color::Black);
-    sf::VertexArray point(sf::Points, 1);
+    vector<Vertex> screen;
+    int N = 0;
     for (int x = 0; x < scene->getSizeX(); x++) {
         for (int y = 0; y < scene->getSizeY(); y++) {
-            for (int n = -2; n < 3; n++) {
-                for (int m = -2; m < 3; m++) {
-                    if (scene->getMaterial(x, y) != nullptr) {
-                        point[0].position = sf::Vector2f(float(2 + 5 * y + n), float(2 + 5 * x + m));
-                        point[0].color = scene->getMaterial(x, y)->getColor();
-                        window_.draw(point);
-                    }
-                }
+            if (scene->getMaterial(x, y) != nullptr) {
+                screen.push_back(scene->getMaterial(x,y)->getPixel());
+                N++;
             }
         }
     }
+    window_.draw(&screen[0], N, Points);
     window_.display();
 }
