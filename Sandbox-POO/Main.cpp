@@ -17,6 +17,14 @@ int main() {
 	Scene scene(500, 500, false);
 	IHM inte(500, 500);
 
+<<<<<<< Updated upstream
+=======
+	int n = 100;
+	int m = 100;
+	RectBrosse brosse;
+	Scene scene(n, m, false);
+	IHM inte(9*n, 9*m, &scene, &brosse);
+>>>>>>> Stashed changes
 
 	for (int i = 0; i < 30; i++) {
 		scene.setMaterial(new Sable, 29 - i, 15);
