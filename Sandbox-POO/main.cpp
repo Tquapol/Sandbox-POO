@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include "IHM.h"
 #include "Scene.h"
+#include "RectangleBrush.h"
 #include "Pierre.h"
 #include "Sable.h"
 #include "InerSable.h"
@@ -14,14 +15,15 @@ using namespace std;
 
 int main() {
 	srand(time(nullptr));
-	int n = 500;
-	int m = 500;
-	Scene scene(n, m, false);
-	IHM inte(n, m);
 
-	while (true) {
-		scene.setMaterial(new InerSable, 10, 250);
-		scene.evolve();
+	int n = 100;
+	int m = 100;
+	RectBrosse brosse;
+	Scene scene(n, m, false);
+	IHM inte(5*n, 5*m, &scene, &brosse);
+
+	while (inte.isOpen()) {
+		inte.inputs();
 		inte.renderSFML(&scene);
 	}
 	return 0;
