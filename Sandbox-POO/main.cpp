@@ -15,16 +15,14 @@ using namespace std;
 
 int main() {
 	srand(time(nullptr));
-
 	int n = 100;
 	int m = 100;
 	Scene scene(n, m, false);
 	RectBrosse brosse(&scene);
-	IHM inte(5*n, 5*m, &scene, &brosse);
-
+	IHM inte(9*n, 9*m, &scene, &brosse);
+	
 	while (true) {
-		scene.setMaterial(new Sable, 10, 50);
-		inte.renderSFML();
+		inte.renderSFML(&scene);
 	}
 	return 0;
 }
