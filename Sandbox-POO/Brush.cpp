@@ -5,9 +5,10 @@
 
 using namespace std;
 
-Brosse::Brosse(unsigned int size, string curentMaterial) {
+Brosse::Brosse(unsigned int size, string curentMaterial, Scene* scene) {
 	size_ = size;
 	curentMaterial_ = curentMaterial;
+	scene_ = scene;
 }
 
 void Brosse::setSize(unsigned int size) {

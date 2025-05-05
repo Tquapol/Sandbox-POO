@@ -11,12 +11,12 @@ using namespace sf;
 
 
 IHM::IHM(unsigned int sizeX, unsigned int sizeY, Scene* scene, Brosse* brosse, bool pause) {
-    window_.create(sf::VideoMode(sizeY_, sizeX_), "Sand Project");
 	sizeX_ = sizeX;
 	sizeY_ = sizeY;
     scene_ = scene;
     brosse_ = brosse;
     pause_ = pause;
+    window_.create(sf::VideoMode(sizeY_, sizeX_), "Sand Project");
 }
 
 
@@ -30,44 +30,53 @@ void IHM::linkBrosse(Brosse* brosse) {
 }
 
 
-void IHM::inputs() {
-    if (Mouse::isButtonPressed(Mouse::Left)) {
-        brosse_->putMaterial(Mouse::getPosition());
-        cout << "Clic-gauche " << Mouse::getPosition().x << " " << Mouse::getPosition().y << endl;
+void IHM::inputs(Event* event) {
+    if (event->type == Event::MouseButtonPressed) {
+        if (event->mouseButton.button == Mouse::Left) {
+            brosse_->putMaterial(Mouse::getPosition());
+            cout << "Clic-gauche " << Mouse::getPosition().x << " " << Mouse::getPosition().y << endl;
+        }
+        if (event->mouseButton.button == Mouse::Right) {
+            brosse_->errase(Mouse::getPosition());
+            cout << "Clic-droit " << Mouse::getPosition().x << " " << Mouse::getPosition().y << endl;
+        }
     }
-    if (Mouse::isButtonPressed(Mouse::Right)) {
-        brosse_->errase(Mouse::getPosition());
-        cout << "Clic-droit " << Mouse::getPosition().x << " " << Mouse::getPosition().y << endl;
+    if (event->type == Event::MouseWheelScrolled) {
+        int newsize = brosse_->getSize() + event->mouseWheel.delta;
+        if (newsize < 1) { newsize = 1; }
+        else if (newsize > int(scene_->getSizeY()/2)) { newsize = int(scene_->getSizeY() / 2); }
+        brosse_->setSize(newsize);
+        cout << "Brosse " << brosse_->getSize();
     }
     if (Keyboard::isKeyPressed(Keyboard::Space)) {
         pause_ = not pause_;
         cout << "Pause " << pause_ << endl;
         while (Keyboard::isKeyPressed(Keyboard::Space));
     }
+    if (event->type == sf::Event::Closed) {
+        window_.close();
+    }
 }
 
 
-void IHM::renderSFML(Scene* scene) {
+void IHM::renderSFML() {
 
     // check all the window's events that were triggered since the last iteration of the loop
     sf::Event event;
     while (window_.pollEvent(event))
     {
-        // "close requested" event: we close the window
-        if (event.type == sf::Event::Closed)
-            window_.close();
+        inputs(&event);
     }
 
-
-    if (not pause_) {
-        // clear the window with black color
+    if (true) {
+        scene_->evolve();
         window_.clear(sf::Color::Black);
         VertexArray quad(Quads, 4);
         vector<VertexArray> screen;
         int N = 0;
-        for (int x = 0; x < scene->getSizeX(); x++) {
-            for (int y = 0; y < scene->getSizeY(); y++) {
-                Materiau* M = scene->getMaterial(x, y);
+        for (int x = 0; x < scene_->getSizeX(); x++) {
+            for (int y = 0; y < scene_->getSizeY(); y++) {
+                Materiau* M = scene_->getMaterial(x, y);
                 if (M != nullptr) {
                     quad[0].color = M->getColor();
                     quad[0].position.x = 5 * M->getPixel().position.x - 2;
@@ -89,9 +98,7 @@ void IHM::renderSFML(Scene* scene) {
         for (int i = 0; i < N; i++) {
             window_.draw(screen[i]);
         }
+        window_.display();
     }
-
-
-    window_.display();
 }
 

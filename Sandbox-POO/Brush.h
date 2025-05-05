@@ -14,7 +14,7 @@ class Brosse {
 
 	Scene* scene_;
 public :
-	Brosse(unsigned int size, string curentMaterial = "Sable");
+	Brosse(unsigned int size, string curentMaterial = "Sable", Scene* scene = nullptr);
 	int getSize() const { return size_; }
 	void linkScene(Scene* scene);
 	void setSize(unsigned int size);

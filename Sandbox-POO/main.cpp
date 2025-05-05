@@ -18,13 +18,13 @@ int main() {
 
 	int n = 100;
 	int m = 100;
-	RectBrosse brosse;
 	Scene scene(n, m, false);
+	RectBrosse brosse(&scene);
 	IHM inte(5*n, 5*m, &scene, &brosse);
 
-	while (inte.isOpen()) {
-		inte.inputs();
-		inte.renderSFML(&scene);
+	while (true) {
+		scene.setMaterial(new Sable, 10, 50);
+		inte.renderSFML();
 	}
 	return 0;
 }

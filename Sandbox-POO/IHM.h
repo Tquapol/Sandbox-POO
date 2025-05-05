@@ -18,10 +18,10 @@ class IHM {
 	Scene* scene_;
 	Brosse* brosse_;
 public:
-	IHM(unsigned int sizeX = 500, unsigned int sizeY = 500, Scene* scene = nullptr, Brosse* brosse = nullptr, bool pause = true);
+	IHM(unsigned int sizeX = 500, unsigned int sizeY = 500, Scene* scene = nullptr, Brosse* brosse = nullptr, bool pause = false);
 	bool isOpen() const { return window_.isOpen(); }
 	void linkScene(Scene* scene);
 	void linkBrosse(Brosse* brosse);
-	void inputs();
-	void renderSFML(Scene* scene);
+	void inputs(Event* event);
+	void renderSFML();
 };

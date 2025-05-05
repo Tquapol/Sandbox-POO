@@ -12,8 +12,8 @@
 using namespace std;
 using namespace sf;
 
-RectBrosse::RectBrosse(unsigned int size, string curentMaterial)
-	: Brosse::Brosse(size, curentMaterial){}
+RectBrosse::RectBrosse(Scene* scene, unsigned int size, string curentMaterial)
+	: Brosse::Brosse(size, curentMaterial, scene){}
 
 
 void RectBrosse::putMaterial(Vector2i position) {
