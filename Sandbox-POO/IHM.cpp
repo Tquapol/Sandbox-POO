@@ -19,6 +19,13 @@ IHM::IHM(unsigned int sizeX, unsigned int sizeY, Scene* scene, Brosse* brosse, b
     window_.create(sf::VideoMode(sizeY_, sizeX_), "Sand Project");
     mouseLeft_ = false;
     mouseRight_ = false;
+    window_.setFramerateLimit(60);
+    window_.setVerticalSyncEnabled(true);
+}
+
+void IHM::setSize(unsigned int x, unsigned int y) {
+    sizeX_ = x;
+    sizeY_ = y;
 }
 
 void IHM::leftClick() {
@@ -54,7 +61,6 @@ void IHM::inputs(Event* event) {
             rightClick();
         }
     }
-
     if (event->type == Event::MouseButtonReleased) {
         releaseClick();
     }
@@ -75,7 +81,7 @@ void IHM::inputs(Event* event) {
         if (event->key.scancode == Keyboard::Scancode::G) {
             scene_->switchGround();
         }
-        if (event->key.scancode == Keyboard::Scancode::X) {
+        if ((event->key.shift)&&(event->key.scancode == Keyboard::Scancode::X)) {
             scene_->errase();
         }
         if (event->key.scancode == Keyboard::Scancode::Num1) {
@@ -90,6 +96,15 @@ void IHM::inputs(Event* event) {
         if (event->key.scancode == Keyboard::Scancode::Num4) {
             brosse_->setMaterial("InerSable");
         }
+        if ((event->key.alt) && (event->key.scancode == Keyboard::Scancode::F4)) {
+            window_.close();
+        }
+    }
+
+    if (event->type == Event::Resized) {
+        scene_->resize(event->size.height / 9, event->size.width / 9);
+        setSize(event->size.width, event->size.height);
+        window_.setSize(Vector2u(event->size.width, event->size.height));
     }
 
     if (event->type == sf::Event::Closed) {

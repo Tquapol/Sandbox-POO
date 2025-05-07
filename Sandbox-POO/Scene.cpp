@@ -53,8 +53,8 @@ void Scene::resize(unsigned int sizeX, unsigned int sizeY) {
 	if (sizeY < sizeY_) {
 		for (int x = 0; x < sizeX_; x++) {
 			for (int m = 0; m < sizeY_ - sizeY; m++) {
-				if (scene_[x].back() != nullptr) {
-					delete scene_[x][-1];
+				if (scene_.at(x).back() != nullptr) {
+					delete scene_.at(x).back();
 				}
 				scene_[x].pop_back();
 			}

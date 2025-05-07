@@ -20,7 +20,7 @@ int main() {
 	Scene scene(n, m, false);
 	Brosse brosse(&scene);
 	IHM inte(9*n, 9*m, &scene, &brosse);
-	
+	ShowWindow(GetConsoleWindow(),0);
 	while (inte.isOpen()) {
 		inte.renderSFML();
 	}

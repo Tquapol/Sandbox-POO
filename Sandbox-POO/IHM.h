@@ -23,6 +23,7 @@ class IHM {
 public:
 	IHM(unsigned int sizeX = 500, unsigned int sizeY = 500, Scene* scene = nullptr, Brosse* brosse = nullptr, bool pause = false);
 	bool isOpen() const { return window_.isOpen(); }
+	void setSize(unsigned int x, unsigned int y);
 	void leftClick();
 	void rightClick();
 	void releaseClick();
