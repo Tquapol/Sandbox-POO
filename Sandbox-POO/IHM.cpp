@@ -17,6 +17,21 @@ IHM::IHM(unsigned int sizeX, unsigned int sizeY, Scene* scene, Brosse* brosse, b
     brosse_ = brosse;
     pause_ = pause;
     window_.create(sf::VideoMode(sizeY_, sizeX_), "Sand Project");
+    mouseLeft_ = false;
+    mouseRight_ = false;
+}
+
+void IHM::leftClick() {
+    mouseLeft_ = true;
+}
+
+void IHM::rightClick() {
+    mouseRight_ = true;
+}
+
+void IHM::releaseClick() {
+    mouseLeft_ = false;
+    mouseRight_ = false;
 }
 
 
@@ -33,26 +48,50 @@ void IHM::linkBrosse(Brosse* brosse) {
 void IHM::inputs(Event* event) {
     if (event->type == Event::MouseButtonPressed) {
         if (event->mouseButton.button == Mouse::Left) {
-            brosse_->putMaterial(Mouse::getPosition());
-            cout << "Clic-gauche " << Mouse::getPosition().x << " " << Mouse::getPosition().y << endl;
+            leftClick();
         }
         if (event->mouseButton.button == Mouse::Right) {
-            brosse_->errase(Mouse::getPosition());
-            cout << "Clic-droit " << Mouse::getPosition().x << " " << Mouse::getPosition().y << endl;
+            rightClick();
         }
     }
+
+    if (event->type == Event::MouseButtonReleased) {
+        releaseClick();
+    }
+
     if (event->type == Event::MouseWheelScrolled) {
-        int newsize = brosse_->getSize() + event->mouseWheel.delta;
+        int newsize = brosse_->getSize();
+        if (event->mouseWheelScroll.delta > 0) { newsize = newsize + 2; }
+        if (event->mouseWheelScroll.delta < 0) { newsize = newsize - 2; }
         if (newsize < 1) { newsize = 1; }
         else if (newsize > int(scene_->getSizeY()/2)) { newsize = int(scene_->getSizeY() / 2); }
         brosse_->setSize(newsize);
-        cout << "Brosse " << brosse_->getSize();
     }
-    if (Keyboard::isKeyPressed(Keyboard::Space)) {
-        pause_ = not pause_;
-        cout << "Pause " << pause_ << endl;
-        while (Keyboard::isKeyPressed(Keyboard::Space));
+
+    if (event->type == Event::KeyPressed) {
+        if(event->key.scancode == Keyboard::Scancode::Space){
+            pause_ = not pause_;
+        }
+        if (event->key.scancode == Keyboard::Scancode::G) {
+            scene_->switchGround();
+        }
+        if (event->key.scancode == Keyboard::Scancode::X) {
+            scene_->errase();
+        }
+        if (event->key.scancode == Keyboard::Scancode::Num1) {
+            brosse_->setMaterial("Pierre");
+        }
+        if (event->key.scancode == Keyboard::Scancode::Num2) {
+            brosse_->setMaterial("Eau");
+        }
+        if (event->key.scancode == Keyboard::Scancode::Num3) {
+            brosse_->setMaterial("Sable");
+        }
+        if (event->key.scancode == Keyboard::Scancode::Num4) {
+            brosse_->setMaterial("InerSable");
+        }
     }
+
     if (event->type == sf::Event::Closed) {
         window_.close();
     }
@@ -61,86 +100,49 @@ void IHM::inputs(Event* event) {
 
 void IHM::renderSFML() {
 
-    // check all the window's events that were triggered since the last iteration of the loop
     sf::Event event;
     while (window_.pollEvent(event))
     {
         inputs(&event);
     }
 
-    if (true) {
-        scene_->evolve();
-        window_.clear(sf::Color::Black);
-        VertexArray quad(Quads, 4);
-        vector<VertexArray> screen;
-        int N = 0;
-        for (int x = 0; x < scene_->getSizeX(); x++) {
-            for (int y = 0; y < scene_->getSizeY(); y++) {
-                Materiau* M = scene_->getMaterial(x, y);
-                if (M != nullptr) {
-                    quad[0].color = M->getColor();
-                    quad[0].position.x = 5 * M->getPixel().position.x - 2;
-                    quad[0].position.y = 5 * M->getPixel().position.y - 2;
-                    quad[1].color = M->getColor();
-                    quad[1].position.x = 5 * M->getPixel().position.x + 2;
-                    quad[1].position.y = 5 * M->getPixel().position.y - 2;
-                    quad[2].color = M->getColor();
-                    quad[2].position.x = 5 * M->getPixel().position.x + 2;
-                    quad[2].position.y = 5 * M->getPixel().position.y + 2;
-                    quad[3].color = M->getColor();
-                    quad[3].position.x = 5 * M->getPixel().position.x - 2;
-                    quad[3].position.y = 5 * M->getPixel().position.y + 2;
-                    screen.push_back(quad);
-                    N++;
-                }
-            }
-        }
-        for (int i = 0; i < N; i++) {
-            window_.draw(screen[i]);
-        }
-        window_.display();
+    if (mouseLeft_) {
+        brosse_->putMaterial(Mouse::getPosition(window_));
     }
-}
-
-
-void IHM::renderSFML(Scene* scene) {
-        // check all the window's events that were triggered since the last iteration of the loop
-    sf::Event event;
-    while (window_.pollEvent(event))
-    {
-		inputs(&event);
+    else if (mouseRight_) {
+        brosse_->errase(Mouse::getPosition(window_));
     }
-	
+
     if (not pause_) {
-		scene_->evolve();
-        window_.clear(sf::Color::Black);
-        VertexArray quad(Quads, 4);
-        vector<VertexArray> screen;
-        int N = 0;
-        for (int x = 0; x < scene->getSizeX(); x++) {
-            for (int y = 0; y < scene->getSizeY(); y++) {
-                Materiau* M = scene->getMaterial(x, y);
-                if (M != nullptr) {
-                    quad[0].color = M->getColor();
-                    quad[0].position.x = 9 * M->getPixel().position.x - 4;
-                    quad[0].position.y = 9 * M->getPixel().position.y - 4;
-                    quad[1].color = M->getColor();
-                    quad[1].position.x = 9 * M->getPixel().position.x + 4;
-                    quad[1].position.y = 9 * M->getPixel().position.y - 4;
-                    quad[2].color = M->getColor();
-                    quad[2].position.x = 9 * M->getPixel().position.x + 4;
-                    quad[2].position.y = 9 * M->getPixel().position.y + 4;
-                    quad[3].color = M->getColor();
-                    quad[3].position.x = 9 * M->getPixel().position.x - 4;
-                    quad[3].position.y = 9 * M->getPixel().position.y + 4;
-                    screen.push_back(quad);
-                    N++;
-                }
+        scene_->evolve();
+    }
+    window_.clear(sf::Color::Black);
+    VertexArray quad(Quads, 4);
+    vector<VertexArray> screen;
+    int N = 0;
+    for (int x = 0; x < scene_->getSizeX(); x++) {
+        for (int y = 0; y < scene_->getSizeY(); y++) {
+            Materiau* M = scene_->getMaterial(x, y);
+            if (M != nullptr) {
+                quad[0].color = M->getColor();
+                quad[0].position.x = 9 * M->getPixel().position.x;
+                quad[0].position.y = 9 * M->getPixel().position.y;
+                quad[1].color = M->getColor();
+                quad[1].position.x = 9 * M->getPixel().position.x + 8;
+                quad[1].position.y = 9 * M->getPixel().position.y;
+                quad[2].color = M->getColor();
+                quad[2].position.x = 9 * M->getPixel().position.x + 8;
+                quad[2].position.y = 9 * M->getPixel().position.y + 8;
+                quad[3].color = M->getColor();
+                quad[3].position.x = 9 * M->getPixel().position.x;
+                quad[3].position.y = 9 * M->getPixel().position.y + 8;
+                screen.push_back(quad);
+                N++;
             }
         }
-		for (int i = 0; i < N; i++) {
-            window_.draw(screen[i]);
-        }
-        window_.display();
-	}
+    }
+    for (int i = 0; i < N; i++) {
+        window_.draw(screen[i]);
+    }
+    window_.display();
 }

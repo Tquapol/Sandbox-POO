@@ -1,13 +1,14 @@
 // Jules ROBIN
 
 #include <iostream>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "Eau.h"
 
 using namespace std;
 
-Eau::Eau(int x, int y, bool solid, unsigned int density, sf::Color color)
-	: Materiau::Materiau(x, y, solid, density, color) {};
+Eau::Eau(int x, int y, string type, bool solid, unsigned int density, sf::Color color, bool inertie)
+	: Materiau::Materiau(x, y, type, solid, density, color, inertie) {};
 
 void Eau::print() const {
 	cout << "Eau ";

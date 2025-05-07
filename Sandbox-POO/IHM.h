@@ -15,11 +15,17 @@ class IHM {
 	unsigned int sizeY_;
 	bool pause_;
 
+	bool mouseLeft_;
+	bool mouseRight_;
+
 	Scene* scene_;
 	Brosse* brosse_;
 public:
 	IHM(unsigned int sizeX = 500, unsigned int sizeY = 500, Scene* scene = nullptr, Brosse* brosse = nullptr, bool pause = false);
 	bool isOpen() const { return window_.isOpen(); }
+	void leftClick();
+	void rightClick();
+	void releaseClick();
 	void linkScene(Scene* scene);
 	void linkBrosse(Brosse* brosse);
 	void inputs(Event* event);

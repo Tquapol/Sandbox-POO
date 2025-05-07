@@ -1,18 +1,21 @@
 // Jules ROBIN
 
 #include <iostream>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "Materiau.h"
 
 using namespace std;
 
-Materiau::Materiau(int x, int y, bool solid, unsigned int density, sf::Color color, bool moved) {
+Materiau::Materiau(int x, int y, string type, bool solid, unsigned int density, sf::Color color, bool moved, bool inertie) {
 	pixel_.position.x = x;
 	pixel_.position.y = y;
 	solid_ = solid;
 	density_ = density;
 	pixel_.color = color;
 	moved_ = moved;
+	type_ = type;
+	inertie_ = inertie;
 }
 
 void Materiau::setX(int x) {		//Les coordonnées x et y sont inversées entre la scène et la fenêtre
@@ -29,6 +32,10 @@ void Materiau::setDensity(unsigned int d) {
 
 void Materiau::setMovedAt(bool m) {
 	moved_ = m;
+}
+
+void Materiau::setInertie(bool v) {
+	inertie_ = v;
 }
 
 void Materiau::print() const {

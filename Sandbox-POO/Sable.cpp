@@ -1,3 +1,5 @@
+// Jules ROBIN
+
 #include <iostream>
 #include <vector>
 #include <SFML/Graphics.hpp>
@@ -6,8 +8,8 @@
 
 using namespace std;
 
-Sable::Sable(int x, int y, bool solid, unsigned int density, sf::Color color)
-	: Materiau::Materiau(x, y, solid, density, color) {};
+Sable::Sable(int x, int y, string type, bool solid, unsigned int density, sf::Color color, bool inertie)
+	: Materiau::Materiau(x, y, type, solid, density, color, inertie) {};
 
 
 void Sable::print() const {

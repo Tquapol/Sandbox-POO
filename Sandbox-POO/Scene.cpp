@@ -92,8 +92,22 @@ void Scene::resize(unsigned int sizeX, unsigned int sizeY) {
 }
 
 
+void Scene::switchGround() {
+	vide_ = not vide_;
+}
+
+
+void Scene::errase() {
+	for (int i = 0; i < sizeX_; i++) {
+		for (int j = 0; j < sizeY_; j++) {
+			removeMaterial(i, j);
+		}
+	}
+}
+
+
 Materiau* Scene::setMaterial(Materiau* M, unsigned int x, unsigned int y) {
-	if ((x < sizeX_) && (y < sizeY_)) {
+	if ((x >= 0) && (x < sizeX_) && (y >= 0) && (y < sizeY_)) {
 		Materiau* exM = getMaterial(x, y);
 		scene_[x][y] = M;
 		M->setX(x);
@@ -105,7 +119,7 @@ Materiau* Scene::setMaterial(Materiau* M, unsigned int x, unsigned int y) {
 
 
 void Scene::removeMaterial(unsigned int x, unsigned int y) {
-	if ((x < sizeX_) && (y < sizeY_) && (scene_[x][y] != nullptr)) {
+	if ((x >= 0) && (x < sizeX_) && (y >= 0) && (y < sizeY_) && (scene_[x][y] != nullptr)) {
 		Materiau* M = scene_[x][y];
 		scene_[x][y] = nullptr;
 		delete M;

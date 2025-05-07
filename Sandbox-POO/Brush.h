@@ -1,3 +1,5 @@
+// Jules ROBIN
+
 #pragma once
 #include <iostream>
 #include <string>
@@ -9,16 +11,17 @@ using namespace sf;
 class Scene;
 
 class Brosse {
-	unsigned int size_;
+	int size_;
+	string brosseType_;
 	string curentMaterial_;
 
 	Scene* scene_;
 public :
-	Brosse(unsigned int size, string curentMaterial = "Sable", Scene* scene = nullptr);
-	int getSize() const { return size_; }
+	Brosse(Scene* scene = nullptr, int size = 3, string type = "Rectangle", string curentMaterial = "InerSable");
 	void linkScene(Scene* scene);
-	void setSize(unsigned int size);
+	int getSize() { return size_; }
+	void setSize(int size);
 	void setMaterial(string M);
-	virtual void putMaterial(Vector2i position) = 0;
-	virtual void errase(Vector2i position) = 0;
+	void putMaterial(Vector2i position) const;
+	void errase(Vector2i position) const;
 };
