@@ -19,7 +19,6 @@ IHM::IHM(unsigned int sizeX, unsigned int sizeY, Scene* scene, Brosse* brosse, b
     window_.create(sf::VideoMode(sizeY_, sizeX_), "Sand Project");
     mouseLeft_ = false;
     mouseRight_ = false;
-    window_.setFramerateLimit(60);
     window_.setVerticalSyncEnabled(true);
 }
 
@@ -159,5 +158,7 @@ void IHM::renderSFML() {
     for (int i = 0; i < N; i++) {
         window_.draw(screen[i]);
     }
+    sf::RectangleShape rectangle = brosse_->showBrush(Mouse::getPosition(window_));
+    window_.draw(rectangle);
     window_.display();
 }
