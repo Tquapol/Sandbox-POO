@@ -23,4 +23,5 @@ public :
 	void setMaterial(string M);
 	void putMaterial(Vector2i position) const;
 	void errase(Vector2i position) const;
+	sf::RectangleShape showBrush(Vector2i position);
 };

@@ -162,5 +162,7 @@ void IHM::renderSFML() {
     for (int i = 0; i < N; i++) {
         window_.draw(screen[i]);
     }
+    sf::RectangleShape rectangle = brosse_->showBrush(Mouse::getPosition(window_));
+    window_.draw(rectangle);
     window_.display();
 }
