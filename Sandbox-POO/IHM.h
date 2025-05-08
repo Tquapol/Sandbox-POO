@@ -29,6 +29,7 @@ public:
 	void releaseClick();
 	void linkScene(Scene* scene);
 	void linkBrosse(Brosse* brosse);
+	void hud();
 	void inputs(Event* event);
 	void renderSFML();
 };
