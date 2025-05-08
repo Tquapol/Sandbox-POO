@@ -12,12 +12,11 @@ class Scene;
 
 class Brosse {
 	int size_;
-	string brosseType_;
 	string curentMaterial_;
 
 	Scene* scene_;
 public :
-	Brosse(Scene* scene = nullptr, int size = 3, string type = "Rectangle", string curentMaterial = "InerSable");
+	Brosse(Scene* scene = nullptr, int size = 3, string curentMaterial = "InerSable");
 	void linkScene(Scene* scene);
 	int getSize() { return size_; }
 	void setSize(int size);

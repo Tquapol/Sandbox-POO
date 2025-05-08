@@ -19,8 +19,8 @@ IHM::IHM(unsigned int sizeX, unsigned int sizeY, Scene* scene, Brosse* brosse, b
     window_.create(sf::VideoMode(sizeY_, sizeX_), "Sand Project");
     mouseLeft_ = false;
     mouseRight_ = false;
-    window_.setFramerateLimit(60);
-    window_.setVerticalSyncEnabled(true);
+    window_.setFramerateLimit(60);              //limite des FPS
+    window_.setVerticalSyncEnabled(true);       //synchronisation verticale
 }
 
 void IHM::setSize(unsigned int x, unsigned int y) {
@@ -52,7 +52,7 @@ void IHM::linkBrosse(Brosse* brosse) {
 }
 
 
-void IHM::inputs(Event* event) {
+void IHM::inputs(Event* event) {                        //La fonction input prend en comte clavier et sourie
     if (event->type == Event::MouseButtonPressed) {
         if (event->mouseButton.button == Mouse::Left) {
             leftClick();
@@ -65,7 +65,7 @@ void IHM::inputs(Event* event) {
         releaseClick();
     }
 
-    if (event->type == Event::MouseWheelScrolled) {
+    if (event->type == Event::MouseWheelScrolled) {             //Augmente ou diminue la taille de la brosse selon le scroll de la molette
         int newsize = brosse_->getSize();
         if (event->mouseWheelScroll.delta > 0) { newsize = newsize + 2; }
         if (event->mouseWheelScroll.delta < 0) { newsize = newsize - 2; }
@@ -101,11 +101,13 @@ void IHM::inputs(Event* event) {
         }
     }
 
+    /*
     if (event->type == Event::Resized) {
         scene_->resize(event->size.height / 9, event->size.width / 9);
         setSize(event->size.width, event->size.height);
         window_.setSize(Vector2u(event->size.width, event->size.height));
     }
+    */
 
     if (event->type == sf::Event::Closed) {
         window_.close();
@@ -115,23 +117,24 @@ void IHM::inputs(Event* event) {
 
 void IHM::renderSFML() {
 
-    sf::Event event;
-    while (window_.pollEvent(event))
+    sf::Event event;                    
+    while (window_.pollEvent(event))        // 1.Traite si il y a un input
     {
         inputs(&event);
     }
 
-    if (mouseLeft_) {
+    if (mouseLeft_) {                                           // 2.Ajoute ou retire un materiau tant que la sourie est enfoncée
         brosse_->putMaterial(Mouse::getPosition(window_));
     }
     else if (mouseRight_) {
         brosse_->errase(Mouse::getPosition(window_));
     }
 
-    if (not pause_) {
+    if (not pause_) {           // Fait evoluer la scene si le jeu n'est pas en pause
         scene_->evolve();
     }
-    window_.clear(sf::Color::Black);
+
+    window_.clear(sf::Color::Black);        // Met a jour l'affichage
     VertexArray quad(Quads, 4);
     vector<VertexArray> screen;
     int N = 0;

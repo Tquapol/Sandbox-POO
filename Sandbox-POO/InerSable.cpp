@@ -56,7 +56,8 @@ bool InerSable::evolveState(vector<vector<Materiau*>>* scene, bool vide) {
 			}
 			n = 1 - n;		// 0 si n = 1 / 1 si n = 0
 		}
-		if (x > scene->size()-1) {
+
+		if (x > scene->size()-1) {							//Modifie l'inertie des matériaux environnants si il entre en colision avec quelque chose
 			if (scene->at(x - 1).at(y) != nullptr) {
 				scene->at(x - 1).at(y)->setInertie(true);
 			}

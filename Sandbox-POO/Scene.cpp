@@ -139,14 +139,14 @@ void Scene::evolve() {
 
 			if (M != nullptr) {
 				if (not M->hasMoved()) {
-					if (M->evolveState(&scene_, vide_)) {
+					if (M->evolveState(&scene_, vide_)) {		// Detecte et detruit si le materiau tombe hors de la scene
 						if (M->getDensity() == 0) {
 							removeMaterial(M->getX(), M->getY());
 						}
 						else {
-							Materiau* M_voisin = setMaterial(M, M->getX(), M->getY());
+							Materiau* M_voisin = setMaterial(M, M->getX(), M->getY());			// Decale le materiau
 
-							if (M_voisin != nullptr) {			//déplace le matériau remplacé
+							if (M_voisin != nullptr) {			// Deplace le materiau remplace
 								int n = rand() % 2;
 								if (scene_[M_voisin->getX()][M_voisin->getY() + 1 - 2 * n] == nullptr) {
 									M_voisin->setY(M_voisin->getY() + 1 - 2 * n);
@@ -171,14 +171,14 @@ void Scene::evolve() {
 								setMaterial(M_voisin, M_voisin->getX(), M_voisin->getY());
 								M_voisin->setMovedAt(true);
 							}
-							M->setMovedAt(true);
+							M->setMovedAt(true);		// Indique que le materiau a ete deplace pour ne pas le traiter deux fois de suite
 						}
 					}
 				}
 			}
 		}
 	}
-	for (vector<Materiau*> ligne : scene_) {		//une fois tous les matériaux bougés
+	for (vector<Materiau*> ligne : scene_) {		//une fois tous les materiaux bouges
 		for (Materiau* M : ligne) {					//on les remets au repos
 			if (M != nullptr) {
 				M->setMovedAt(false);

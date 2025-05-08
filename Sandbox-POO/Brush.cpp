@@ -11,9 +11,8 @@
 
 using namespace std;
 
-Brosse::Brosse(Scene* scene, int size, string type,  string curentMaterial) {
+Brosse::Brosse(Scene* scene, int size, string curentMaterial) {
 	size_ = size;
-	brosseType_ = type;
 	curentMaterial_ = curentMaterial;
 	scene_ = scene;
 }
