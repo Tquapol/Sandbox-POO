@@ -44,7 +44,7 @@ void Materiau::print() const {
 	cout << "Densite :" << density_ << ")" << endl;
 }
 
-bool Materiau::evolveState(vector<vector<Materiau*>>* scene, bool vide) {			// Cette fonction permet de prendre en compte les bords de la scene
+bool Materiau::evolveState(vector<vector<Materiau*>>* scene, bool vide) {			// Cette méthode permet de prendre en compte les bords de la scene
 	if (not isSolid()) {
 		int sizeX = scene->size();
 		int sizeY = scene->at(0).size();

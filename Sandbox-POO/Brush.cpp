@@ -57,7 +57,7 @@ void Brosse::errase(Vector2i position) const {
 	}
 }
 
-sf::RectangleShape Brosse::showBrush(Vector2i position) {
+sf::RectangleShape Brosse::showBrush(Vector2i position) {		// Antoine DANIEL
 	sf::RectangleShape rectangle(sf::Vector2f(size_*9, size_*9));
 	rectangle.setPosition(Vector2f(position.x - 4.5*size_, position.y - 4.5*size_));
 	rectangle.setFillColor(sf::Color::Transparent);

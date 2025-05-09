@@ -38,6 +38,6 @@ public:
 	void setDensity(unsigned int d);
 	void setInertie(bool v);
 	virtual void print() const;
-	sf::Color getColor() const { return pixel_.color; }
+	Color getColor() const { return pixel_.color; }
 	virtual bool evolveState(vector<vector<Materiau*>>* scene, bool vide);
 };

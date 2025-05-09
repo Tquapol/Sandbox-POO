@@ -10,7 +10,7 @@ using namespace std;
 using namespace sf;
 
 class IHM {
-	sf::RenderWindow window_;
+	RenderWindow window_;
 	unsigned int sizeX_;
 	unsigned int sizeY_;
 	bool pause_;
@@ -24,9 +24,9 @@ public:
 	IHM(unsigned int sizeX = 500, unsigned int sizeY = 500, Scene* scene = nullptr, Brosse* brosse = nullptr, bool pause = false);
 	bool isOpen() const { return window_.isOpen(); }
 	void setSize(unsigned int x, unsigned int y);
-	void leftClick();
-	void rightClick();
-	void releaseClick();
+	void leftClic();
+	void rightClic();
+	void releaseClic();
 	void linkScene(Scene* scene);
 	void linkBrosse(Brosse* brosse);
 	void hud();

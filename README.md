@@ -1,23 +1,21 @@
 # Sand Project
 
-Tâches à réaliser :
-- [x] Créer le repository git
-- [ ] Dessiner le diagramme des classes
-- [ ] Préparer un plan de réalisation
-- [x] Installer SFML
-- [ ] Réaliser le projet
-- [ ] Préparer le compte-rendu
+Sandbox-POO est un jeu de type bac-à-sable comportant quatre
+éléments : Pierre, Eau, Sable et InerSable.
 
-Cahier des charges : 
-- [ ] Créer une interface graphique
-- [ ] Simuler les différents matériaux suivant leur classe
-- [ ] Afficher les matériaux avec différentes couleurs
-- [ ] Matériaux à coder :
-  - [ ] Au moins un solide (pierre)
-  - [ ] Au moins un liquide (sable)
-- [ ] Intéractions à coder :
-  - [ ] Dessiner un matériau
-  - [ ] Effacer un matériau
-  - [ ] Changer de matériau
+Contrôles :
+	1 -> Pierre
+	2 -> Eau
+	3 -> Sable
+	4 -> InerSable
+	Espace -> Pause
+	G -> Sol
+	Shift-X -> Effacer
+	Clic gauche -> Dessiner
+	Clic droit -> Gommer
+	Molette -> Modifier la taille de la brosse
 
-- [ ] Ajouter des fonctionnalités bonus
+En cas de problème d'exécution due à l'antivirus, modifier
+l'accord depuis les paramètres de l'ordinateur.
+
+Un jeu de Klarkifou par Tquapol et Antoine Daniel.

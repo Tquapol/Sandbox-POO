@@ -28,15 +28,15 @@ void IHM::setSize(unsigned int x, unsigned int y) {
     sizeY_ = y;
 }
 
-void IHM::leftClick() {
+void IHM::leftClic() {
     mouseLeft_ = true;
 }
 
-void IHM::rightClick() {
+void IHM::rightClic() {
     mouseRight_ = true;
 }
 
-void IHM::releaseClick() {
+void IHM::releaseClic() {
     mouseLeft_ = false;
     mouseRight_ = false;
 }
@@ -55,14 +55,14 @@ void IHM::linkBrosse(Brosse* brosse) {
 void IHM::inputs(Event* event) {                        //La fonction input prend en comte clavier et sourie
     if (event->type == Event::MouseButtonPressed) {
         if (event->mouseButton.button == Mouse::Left) {
-            leftClick();
+            leftClic();
         }
         if (event->mouseButton.button == Mouse::Right) {
-            rightClick();
+            rightClic();
         }
     }
     if (event->type == Event::MouseButtonReleased) {
-        releaseClick();
+        releaseClic();
     }
 
     if (event->type == Event::MouseWheelScrolled) {             //Augmente ou diminue la taille de la brosse selon le scroll de la molette

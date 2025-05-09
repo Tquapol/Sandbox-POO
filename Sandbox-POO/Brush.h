@@ -18,10 +18,10 @@ class Brosse {
 public :
 	Brosse(Scene* scene = nullptr, int size = 3, string curentMaterial = "InerSable");
 	void linkScene(Scene* scene);
-	int getSize() { return size_; }
+	int getSize() const { return size_; }
 	void setSize(int size);
 	void setMaterial(string M);
 	void putMaterial(Vector2i position) const;
 	void errase(Vector2i position) const;
-	sf::RectangleShape showBrush(Vector2i position);
+	RectangleShape showBrush(Vector2i position);
 };

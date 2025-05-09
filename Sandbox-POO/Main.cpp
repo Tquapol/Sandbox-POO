@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <Windows.h>
+#include <string>
 #include "IHM.h"
 #include "Scene.h"
 #include "Brush.h"
@@ -15,8 +16,17 @@ using namespace std;
 
 int main() {
 	srand(time(nullptr));	//Randomise la seed pour ne pas avoir deux fois la meme simulation (random)
-	int n = 100;
-	int m = 100;
+	ShowWindow(GetConsoleWindow(), 1);		//ferme la console
+	system("CLS");		//Recupere les dimentions de la scene
+	string str_n;
+	string str_m;
+	cout << "Longueur de la grille : ";
+	getline(cin, str_m);
+	cout << "Hauteur de la grille : ";
+	getline(cin, str_n);
+	int n = stoi(str_n);
+	int m = stoi(str_m);
+
 	Scene scene(n, m, false);		//initialise la scene, la brosse et la fenetre
 	Brosse brosse(&scene);
 	IHM inte(9*n, 9*m, &scene, &brosse);
